@@ -21,7 +21,7 @@
  - Chaque script doit être en extension `.ink` et vous devez avoir [l'extension ink pour Unity](https://assetstore.unity.com/packages/tools/integration/ink-unity-integration-60055)
  - Les fichiers doivent avoir été compilés par ink pour pouvoir être lus (Il doit y avoir des fichiers `.json` de même nom que les `.ink`)
 
-#### Unity
+#### Scène
 
  - La scène ___doit___ comporter un Canvas avec une `Scroll View` et un `Panel`. Dans les deux cas le `Content` doit être assigné à un `Text`.
  - Dans le cas de la `Scroll View` elle ___doit___ être nommée `History` et le `Text` nommé `History Text`.
@@ -29,6 +29,13 @@
  	- Le `Panel` de la boîte de dialogue ___doit___ posséder le script `GuiManager`
  - L'historique doit rester visible pour le moment, il n'est pas cachable
  - La boîte de dialogue est cachée en désactivant les élements `Image` et `Text`
+
+#### Personnages
+
+ - Les personnages d'histoire doivent avoir un script `DialogueEngine` d'attachés et le booléen `has_story` à vrai
+ - Leur nom est transmit par le script `Character` ainsi que leur âge et l'âge qu'ils attendent
+ - Le chemin des scripts doit être passé aux différents PNJ avec dialogues via leur `DialogueEngine` _depuis_ le dossier Resources et sans l'extension
+ - Dans l'idéal, placés sous le dossier Resources/Dialogues mais juste dans Resources devrait suffir
 
 ### Structure des scripts et langage ink
 
