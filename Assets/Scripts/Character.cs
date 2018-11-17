@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+	private InputManager inputManager;
 	private MoveEngine moveEngine;
 	private Collider2D collider;
 
@@ -20,6 +21,7 @@ public class Character : MonoBehaviour
 	// Use this for initialization
 	void Start () {
 		moveEngine = GetComponent<MoveEngine>();
+		inputManager = GetComponent<InputManager>();
 		collider = GetComponent<Collider2D>();
 		counter_life = 0;
 		
@@ -65,19 +67,7 @@ public class Character : MonoBehaviour
 			}
 			else
 			{
-				float distance_min = -1f;
-				float distance_cur;
-				Character[] others = GameObject.FindObjectsOfType(typeof(Character)) as Character[];
-				Character nearest = null;
-				foreach ( Character other in others)
-				{
-					distance_cur = (other.GetComponent<Transform>().position - transform.position).magnitude;
-					if (can_ultimate_possess(other, distance_cur, distance_min))
-					{
-						distance_min = distance_cur;
-						nearest = other;
-					}
-				}
+				Character nearest = find_nearest_possessable();
 				if (nearest != null)
 					nearest.switch_corpse(this);
 				else
@@ -91,9 +81,28 @@ public class Character : MonoBehaviour
 		}
 	}
 
+	// finds the nearest Character you can possess
+	public Character find_nearest_possessable() {
+		float distance_min = -1f;
+		float distance_cur;
+		Character[] others = GameObject.FindObjectsOfType(typeof(Character)) as Character[];
+		Character nearest = null;
+		foreach ( Character other in others)
+		{
+			distance_cur = (other.GetComponent<Transform>().position - transform.position).magnitude;
+			if (can_ultimate_possess(other, distance_cur, distance_min))
+			{
+				distance_min = distance_cur;
+				nearest = other;
+			}
+		}
+		return nearest;
+	}
+
 	// returns if the Character can be possessed with the last chance nearest Character available switch
 	private bool can_ultimate_possess (Character other, float distance_cur, float distance_min)
 	{
+		// TODO : check if is has no dialog
 		return (other != this &&						// not the same object
 				other.is_young_enough() &&				// young enough
 				other.GetComponent<SpriteRenderer>().isVisible &&	// is seen by the camera
@@ -109,6 +118,7 @@ public class Character : MonoBehaviour
 	}
 
 	public void switch_corpse(Character other) {
+		// TODO : check if has no dialog
 		if (is_young_enough())
 		{
 			MoveEngine other_move_engine = other.GetComponent<MoveEngine>();
@@ -121,10 +131,10 @@ public class Character : MonoBehaviour
 			other_input_manager.chase_mouse = false;
 			other_collider.isTrigger = true;
 			// TODO : launch animation
-			Debug.Log("WOOOOOSH, you are " + ((Age)age).ToString());
 			is_player = true;
 			moveEngine.can_move = true;
 			collider.isTrigger = false;
+			inputManager.time_last_proxy_possess = Time.time;
 		}
 	}
 }

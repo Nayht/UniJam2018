@@ -20,11 +20,13 @@ public class InputManager : MonoBehaviour {
 	private float distance_dialogue = 0.5f;
 	private float min_velocity = 0.01f;
 
-	// to see if click is relevant
+	// to see if click is relevant and other possession stuff
 	private float time_click_down;
 	private float time_click_up;
 	private float time_relevant = 1.0f;
 	private float distance_relevant = 2.0f;
+	public float time_last_proxy_possess = 0f;
+	private float delay_proxy_possess = 0.1f;
 
 	// Use this for initialization
 	void Start () {
@@ -41,8 +43,26 @@ public class InputManager : MonoBehaviour {
 		if (character.is_player)
 		{
 			movementController();
+			proximity_possess();
 		}
 	}
+
+	void proximity_possess() {
+		Character nearest = character.find_nearest_possessable();
+		if (nearest != null)
+		{
+			float distance = (transform.position - nearest.GetComponent<Transform>().position).magnitude;
+			if( distance < distance_relevant)
+			{
+				// TODO : hilight nearest
+				if (Input.GetButtonUp("Possess") && Time.time - time_last_proxy_possess > delay_proxy_possess)
+				{
+					nearest.switch_corpse(character);
+				}
+			}
+		}
+	}
+
 
 	// called if has been clicked
 	void OnMouseOver() {
