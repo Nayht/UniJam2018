@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour {
 	private Rigidbody2D rb;
 
 	// to keep track of the mouse position to chase it
-	private bool chase_mouse;
+	public bool chase_mouse;
 	private Vector2 mouse_position;
 	[SerializeField]
 	private float distance_stop = 0.1f;
@@ -67,17 +67,7 @@ public class InputManager : MonoBehaviour {
 					{
 						if (other_character.is_player)
 						{
-							other_move_engine = col.GetComponent<MoveEngine>();
-							other_character.is_player = false;
-							other_move_engine.move(Vector2.zero);
-							other_move_engine.can_move = false;
-							col.GetComponent<InputManager>().chase_mouse = false;
-							col.isTrigger = true;
-							// TODO : launch animation
-							Debug.Log("WOOOOOSH, you are " + ((Age)character.age).ToString());
-							moveEngine.can_move = true;
-							character.is_player = true;
-							collider.isTrigger = false;
+							character.switch_corpse(other_character);
 							break;
 						}
 					}

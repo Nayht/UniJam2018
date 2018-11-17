@@ -152,6 +152,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114141977819667432, guid: b795b1c43d71b4ff4a570d74688a5e60,
+        type: 2}
+      propertyPath: is_player
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232160247518270, guid: b795b1c43d71b4ff4a570d74688a5e60,
+        type: 2}
+      propertyPath: can_move
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114141977819667432, guid: b795b1c43d71b4ff4a570d74688a5e60,
+        type: 2}
+      propertyPath: age
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b795b1c43d71b4ff4a570d74688a5e60, type: 2}
   m_IsPrefabAsset: 0
@@ -328,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9403a0980c214cf7b337831263904a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chase_mouse: 0
   distance_stop: 0.1
   distance_dialogue: 0.5
 --- !u!212 &922173717
@@ -447,6 +463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   age: 3
   is_player: 0
+  counter_life: 0
+  max_life: 500
 --- !u!1001 &1201245291
 Prefab:
   m_ObjectHideFlags: 0
