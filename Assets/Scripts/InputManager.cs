@@ -7,17 +7,29 @@ public class InputManager : MonoBehaviour {
 	// over MonoBehaviours
 	private MoveEngine moveEngine;
 	private Transform transform;
+	private Character character;
+	private Collider2D collider;
 
 	// to keep track of the mouse position to chase it
 	private bool chase_mouse;
 	private Vector2 mouse_position;
 	[SerializeField]
 	private float distance_stop = 0.1f;
+	[SerializeField]
+	private float distance_dialogue = 0.5f;
+
+	// to see if click is relevant
+	private float time_click_down;
+	private float time_click_up;
+	private float time_relevant = 1.0f;
+	private float distance_relevant = 2.0f;
 
 	// Use this for initialization
 	void Start () {
 		moveEngine = GetComponent<MoveEngine>();
 		transform = GetComponent<Transform>();
+		character = GetComponent<Character>();
+		collider = GetComponent<Collider2D>();
 		chase_mouse = false;
 	}
 	
@@ -25,6 +37,55 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 		movementController();
 	}
+
+	// called if has been clicked
+	void OnMouseOver() {
+		if (Input.GetMouseButtonDown(1))
+		{
+			time_click_down = Time.time;
+		}
+		if (Input.GetMouseButtonUp(1))
+		{
+			time_click_up = Time.time;
+			if (time_click_up - time_click_down < time_relevant)
+			{
+				Collider2D[] collider_nearby;
+				Vector2 position = new Vector2(transform.position.x, transform.position.y);
+				collider_nearby = Physics2D.OverlapCircleAll(position,distance_relevant);
+				Character other_character;
+				MoveEngine other_move_engine;
+				foreach (Collider2D col in collider_nearby)
+				{
+					other_character = col.GetComponent<Character>();
+					if (other_character != null)
+					{
+						if (other_character.is_player)
+						{
+							other_move_engine = col.GetComponent<MoveEngine>();
+							other_character.is_player = false;
+							other_move_engine.move(Vector2.zero);
+							other_move_engine.can_move = false;
+							col.isTrigger = true;
+							// TODO : launch animation
+							Debug.Log("WOOOOOSH");
+							moveEngine.can_move = true;
+							character.is_player = true;
+							collider.isTrigger = false;
+							break;
+						}
+					}
+
+				}
+			}
+		}
+	}
+/*
+	void possession() {
+		if (Input.GetMouseButtonDown(1)) // right click
+		{
+		}
+	}
+	*/
 
 	// gets the input and generates a direction for moveEngine.move
 	void movementController() {

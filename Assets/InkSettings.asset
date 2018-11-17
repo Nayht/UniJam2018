@@ -16,7 +16,7 @@ MonoBehaviour:
   compileAutomatically: 1   
   delayInPlayMode: 1
   handleJSONFilesAutomatically: 1
-  compileTimeout: 120
+  compileTimeout: 15
   customInklecateOptions:
     runInklecateWithMono: 1
     monoPaths:

@@ -5,8 +5,10 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
 	[SerializeField]
-	private Age age;
+	public Age age;
 	private Age acceptsAge;
+
+	public bool is_player = false;
 
 	private int dialogueProgression;
 	
