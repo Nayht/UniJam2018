@@ -123,10 +123,10 @@ public class Character : MonoBehaviour
 	// returns if the Character can be possessed with the last chance nearest Character available switch
 	private bool can_ultimate_possess (Character other, float distance_cur, float distance_min)
 	{
-		// TODO : check if is has no dialog
 		return (other != this &&						// not the same object
 				other.is_young_enough() &&				// young enough
 				other.GetComponent<SpriteRenderer>().isVisible &&	// is seen by the camera
+				!other.has_dialogue &&					// has no dialog
 				(distance_cur < distance_min || distance_min == -1f));	// is less far than another
 	}
 
@@ -139,8 +139,7 @@ public class Character : MonoBehaviour
 	}
 
 	public void switch_corpse(Character other) {
-		// TODO : check if has no dialog
-		if (is_young_enough())
+		if (is_young_enough() && !has_dialogue)
 		{
 			MoveEngine other_move_engine = other.GetComponent<MoveEngine>();
 			InputManager other_input_manager = other.GetComponent<InputManager>();
