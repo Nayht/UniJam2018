@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using Ink.Runtime;
 
@@ -29,19 +30,20 @@ public class DialogueEngine : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		Thread.Sleep(2000);
 		Progress();
 	}
 
-	void UpdateGUI(string dialogueOutput)
+	private void UpdateGUI(string dialogueOutput)
 	{
 		
 	}
 	
-	void Progress()
+	public void Progress()
 	{
 		if (story.canContinue)
 		{
-			Debug.Log(story.Continue());
+			GuiManager.Display(story.Continue());
 		}
 		else
 		{
@@ -49,16 +51,20 @@ public class DialogueEngine : MonoBehaviour
 			{
 				manageChoices();
 			}
+			else
+			{
+				GuiManager.HideDisplay();
+			}
 		}
 	}
 
-	void manageChoices()
+	private void manageChoices()
 	{
-		for (int i = 0; i < story.currentChoices.Count; i++)
+		foreach (var choice in story.currentChoices)
 		{
-			Choice choice = story.currentChoices[i];
 			Debug.Log("Choix : "+choice.text);
 		}
+
 		story.ChooseChoiceIndex(0);
 	}
 }
