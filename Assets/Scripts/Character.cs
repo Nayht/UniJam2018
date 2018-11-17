@@ -72,10 +72,8 @@ public class Character : MonoBehaviour
 				foreach ( Character other in others)
 				{
 					distance_cur = (other.GetComponent<Transform>().position - transform.position).magnitude;
-					Debug.Log(other.ToString() + " : " + distance_cur.ToString());
-					if (other != this && other.is_young_enough() && (distance_cur < distance_min || distance_min == -1f))
+					if (can_ultimate_possess(other, distance_cur, distance_min))
 					{
-						Debug.Log("WHY ME ?");
 						distance_min = distance_cur;
 						nearest = other;
 					}
@@ -90,6 +88,15 @@ public class Character : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	// returns if the Character can be possessed with the last chance nearest Character available switch
+	private bool can_ultimate_possess (Character other, float distance_cur, float distance_min)
+	{
+		return (other != this &&						// not the same object
+				other.is_young_enough() &&				// young enough
+				other.GetComponent<SpriteRenderer>().isVisible &&	// is seen by the camera
+				(distance_cur < distance_min || distance_min == -1f));	// is less far than another
 	}
 
 	// returns if the Character is young enough to be possessed
