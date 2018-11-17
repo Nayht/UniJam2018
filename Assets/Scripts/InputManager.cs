@@ -9,6 +9,7 @@ public class InputManager : MonoBehaviour {
 	private Transform transform;
 	private Character character;
 	private Collider2D collider;
+	private Rigidbody2D rb;
 
 	// to keep track of the mouse position to chase it
 	private bool chase_mouse;
@@ -17,6 +18,7 @@ public class InputManager : MonoBehaviour {
 	private float distance_stop = 0.1f;
 	[SerializeField]
 	private float distance_dialogue = 0.5f;
+	private float min_velocity = 0.01f;
 
 	// to see if click is relevant
 	private float time_click_down;
@@ -30,12 +32,16 @@ public class InputManager : MonoBehaviour {
 		transform = GetComponent<Transform>();
 		character = GetComponent<Character>();
 		collider = GetComponent<Collider2D>();
+		rb = GetComponent<Rigidbody2D>();
 		chase_mouse = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		movementController();
+		if (character.is_player)
+		{
+			movementController();
+		}
 	}
 
 	// called if has been clicked
@@ -57,7 +63,7 @@ public class InputManager : MonoBehaviour {
 				foreach (Collider2D col in collider_nearby)
 				{
 					other_character = col.GetComponent<Character>();
-					if (other_character != null)
+					if (other_character != null && col != collider) // if is a character and is not the same object
 					{
 						if (other_character.is_player)
 						{
@@ -65,9 +71,10 @@ public class InputManager : MonoBehaviour {
 							other_character.is_player = false;
 							other_move_engine.move(Vector2.zero);
 							other_move_engine.can_move = false;
+							col.GetComponent<InputManager>().chase_mouse = false;
 							col.isTrigger = true;
 							// TODO : launch animation
-							Debug.Log("WOOOOOSH");
+							Debug.Log("WOOOOOSH, you are " + ((Age)character.age).ToString());
 							moveEngine.can_move = true;
 							character.is_player = true;
 							collider.isTrigger = false;
@@ -79,13 +86,6 @@ public class InputManager : MonoBehaviour {
 			}
 		}
 	}
-/*
-	void possession() {
-		if (Input.GetMouseButtonDown(1)) // right click
-		{
-		}
-	}
-	*/
 
 	// gets the input and generates a direction for moveEngine.move
 	void movementController() {
@@ -108,6 +108,12 @@ public class InputManager : MonoBehaviour {
 				chase_mouse = false;
 			}
 		}
+		/*
+		if (rb.velocity.magnitude == 0f)
+		{
+			chase_mouse = false;
+		}
+		*/
 		// KEYBOARD
 		keyboard_direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		// the keyboard is prioritary
