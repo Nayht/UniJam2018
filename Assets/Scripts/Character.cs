@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
@@ -12,11 +13,14 @@ public class Character : MonoBehaviour
 	private Age acceptsAge;
 
 	public bool is_player = false;
-	public int counter_life; // time the character has been possessed
+	public float counter_life; // time the character has been possessed
 	[SerializeField]
-	private float max_life = 500;
+	private float max_life = 30f;
 
 	private int dialogueProgression;
+
+	public Slider mainSlider;
+	public Image slider_fill;
 	
 	// Use this for initialization
 	void Start () {
@@ -24,7 +28,8 @@ public class Character : MonoBehaviour
 		inputManager = GetComponent<InputManager>();
 		collider = GetComponent<Collider2D>();
 		counter_life = 0;
-		
+		mainSlider = (GameObject.FindObjectsOfType(typeof(Slider)) as Slider[])[0];
+		slider_fill = (GameObject.Find("SliderFill")).GetComponent<Image>();
 	}
 	
 	// Update is called once per frame
@@ -56,13 +61,26 @@ public class Character : MonoBehaviour
 	}
 
 	void grow_old() {
-		counter_life++;
+		counter_life += Time.deltaTime;
+		mainSlider.value = (max_life - counter_life)/max_life;
+		if (mainSlider.value > 0.5f)
+		{
+			slider_fill.color = new Color(0f,0.8f,0f);
+		}
+		else if (mainSlider.value > 0.2f)
+		{
+			slider_fill.color = new Color(0.8f,0.8f,0f);
+		}
+		else
+		{
+			slider_fill.color = new Color(0.8f,0f,0f);
+		}
 		if (counter_life > max_life)
 		{
 			// TODO : animation
 			if (age < Age.ELDER)
 			{
-				counter_life = 0;
+				counter_life = 0f;
 				age++;
 			}
 			else
