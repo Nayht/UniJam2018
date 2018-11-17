@@ -10,20 +10,24 @@ public class InputManager : MonoBehaviour {
 	private Transform transform;
 	private Character character;
 	private Collider2D collider;
+	private Rigidbody2D rb;
 
 	// to keep track of the mouse position to chase it
-	private bool chase_mouse;
+	public bool chase_mouse;
 	private Vector2 mouse_position;
 	[SerializeField]
 	private float distance_stop = 0.1f;
 	[SerializeField]
 	private float distance_dialogue = 2.0f;
+	private float min_velocity = 0.01f;
 
-	// to see if click is relevant
+	// to see if click is relevant and other possession stuff
 	private float time_click_down;
 	private float time_click_up;
 	private float time_relevant = 1.0f;
 	private float distance_relevant = 2.0f;
+	public float time_last_proxy_possess = 0f;
+	private float delay_proxy_possess = 0.1f;
 
 	public static bool inDialogue;
 	
@@ -34,12 +38,17 @@ public class InputManager : MonoBehaviour {
 		transform = GetComponent<Transform>();
 		character = GetComponent<Character>();
 		collider = GetComponent<Collider2D>();
+		rb = GetComponent<Rigidbody2D>();
 		chase_mouse = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		movementController();
+		if (character.is_player)
+		{
+			movementController();
+			proximity_possess();
+		}
 		if (inDialogue && Input.GetMouseButtonUp(0) && dialogEngine != null)
 		{
 			dialogEngine.Progress();
@@ -51,6 +60,22 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
+	void proximity_possess() {
+		Character nearest = character.find_nearest_possessable();
+		if (nearest != null)
+		{
+			float distance = (transform.position - nearest.transform.position).magnitude;
+			if( distance < distance_relevant)
+			{
+				// TODO : hilight nearest
+				if (Input.GetButtonUp("Possess") && Time.time - time_last_proxy_possess > delay_proxy_possess)
+				{
+					nearest.switch_corpse(character);
+				}
+			}
+		}
+	}
+	
 	// called if moused over
 	void OnMouseOver() {
 		if (!inDialogue && !character.has_dialogue)
@@ -68,16 +93,7 @@ public class InputManager : MonoBehaviour {
 					Character player = GetPlayerInRadius(distance_relevant);
 					if (player != null)
 					{
-						MoveEngine player_move_engine = player.GetComponent<MoveEngine>();
-						player.is_player = false;
-						player_move_engine.move(Vector2.zero);
-						player_move_engine.can_move = false;
-						player.GetComponent<Collider2D>().isTrigger = true;
-						// TODO : launch animation
-						Debug.Log("WOOOOOSH");
-						moveEngine.can_move = true;
-						character.is_player = true;
-						collider.isTrigger = false;
+						character.switch_corpse(player);
 					}
 				}
 			}
@@ -114,7 +130,7 @@ public class InputManager : MonoBehaviour {
 		foreach (Collider2D col in collider_nearby)
 		{
 			other_character = col.GetComponent<Character>();
-			if (other_character == null) continue;
+			if (other_character == null && col == collider) continue;
 			if (other_character.is_player)
 			{
 				return (other_character);
