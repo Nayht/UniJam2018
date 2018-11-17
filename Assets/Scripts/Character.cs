@@ -8,6 +8,8 @@ public class Character : MonoBehaviour
 	private Age age;
 	private Age acceptsAge;
 
+	public bool is_player = false;
+
 	private int dialogueProgression;
 	
 	// Use this for initialization
