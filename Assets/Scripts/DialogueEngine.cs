@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 using Ink.Runtime;
@@ -52,16 +53,39 @@ public class DialogueEngine : MonoBehaviour
 			}
 			else if(!currentTags.Contains("Ended"))
 			{
-				currentTags = story.currentTags;
-				GuiManager.HideDisplay();
-				InputManager.inDialogue = false;
+				currentTags = currentTags.Union(story.currentTags).ToList();
+				if (currentTags.Contains("GoodAge") && !currentTags.Contains("GoodAgeEnded"))
+				{
+					currentTags.Remove("Ended");
+					story.ChoosePathString("GoodAge");
+				}
+				else
+				{
+					GuiManager.HideDisplay();
+					InputManager.inDialogue = false;
+				}
+
 			}
 			else
 			{
-				currentTags.Clear();
-				story.ChoosePathString("OneLiner");
+				if (currentTags.Contains("GoodAge") && !currentTags.Contains("GoodAgeEnded"))
+				{
+					currentTags.Remove("Ended");
+					story.ChoosePathString("GoodAge");
+				}
+				else
+				{
+					currentTags.Remove("Ended");
+					story.ChoosePathString("OneLiner");
+				}
 			}
 		}
+	}
+
+	public void GoodAgeProgress()
+	{
+		currentTags.Add("GoodAge");
+		Progress();
 	}
 
 	private void ManageChoices()

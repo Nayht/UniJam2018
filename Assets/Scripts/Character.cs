@@ -7,7 +7,8 @@ public class Character : MonoBehaviour
 {
 	[SerializeField]
 	public Age age;
-	private Age acceptsAge;
+	[SerializeField]
+	public Age acceptsAge;
 
 	public bool is_player = false;
 	[FormerlySerializedAs("has_dialog")] public bool has_dialogue = false;

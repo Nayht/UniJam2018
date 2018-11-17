@@ -284,7 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance_stop: 0.1
   distance_dialogue: 0.5
-  inDialog: 0
 --- !u!114 &521203886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   age: 0
+  acceptsAge: 0
   is_player: 0
   has_dialogue: 0
 --- !u!212 &521203888
@@ -763,6 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   age: 0
+  acceptsAge: 2
   is_player: 0
   has_dialogue: 1
 --- !u!114 &1159407436
@@ -778,7 +779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance_stop: 0.1
   distance_dialogue: 0.5
-  inDialog: 0
 --- !u!114 &1159407437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,7 +958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distance_stop: 0.1
   distance_dialogue: 0.5
-  inDialog: 0
 --- !u!61 &1794074063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -995,7 +994,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ffcfd41b534e86bb93bb07400e152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  age: 0
+  age: 2
+  acceptsAge: 0
   is_player: 1
   has_dialogue: 0
 --- !u!1 &1985656423

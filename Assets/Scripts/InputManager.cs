@@ -86,7 +86,15 @@ public class InputManager : MonoBehaviour {
 				{
 					inDialogue = true;
 					chase_mouse = false;
-					dialogEngine.Progress();
+					if (player.age == character.acceptsAge)
+					{
+						Debug.Log("Good age");
+						dialogEngine.GoodAgeProgress();
+					}
+					else
+					{
+						dialogEngine.Progress();
+					}
 				}
 			}
 		}

@@ -3,6 +3,7 @@
 === Start
 
 Salutations étranger !
+Test de multi-paragraphe\nTest donc
 Banana man
 -> part2
 
@@ -20,4 +21,10 @@ THE CHOICE BEGINS
 === OneLiner
 
 Test du one-liner # Ended
+-> END
+
+
+=== GoodAge
+
+Oh boy you looking good # GoodAgeEnded # Ended
 -> END
