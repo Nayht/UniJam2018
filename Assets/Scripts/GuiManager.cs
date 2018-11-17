@@ -25,7 +25,7 @@ public class GuiManager : MonoBehaviour
 	public static void Display(string toDisplay)
 	{
 		textDisplay.enabled = true;
-		textDisplay.enabled = true;
+		backgroundDisplay.enabled = true;
 		textDisplay.text = toDisplay;
 	}
 

@@ -6,18 +6,19 @@ using Ink.Runtime;
 
 public class DialogueEngine : MonoBehaviour
 {
-
 	private Story story;
 	
 	[SerializeField]
 	private string storyLocation;
 
-	[SerializeField]
 	private TextAsset storyAsset;
+
+	private List<string> currentTags;
 	
 	// Use this for initialization
 	void Start ()
 	{
+		currentTags = new List<string>();
 		if (string.IsNullOrEmpty(storyLocation))
 		{
 			storyLocation = "Dialogues/New_Ink";
@@ -29,12 +30,6 @@ public class DialogueEngine : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update ()
-	{
-		Thread.Sleep(2000);
-		Progress();
-	}
-
-	private void UpdateGUI(string dialogueOutput)
 	{
 		
 	}
@@ -49,16 +44,22 @@ public class DialogueEngine : MonoBehaviour
 		{
 			if (story.currentChoices.Count > 0)
 			{
-				manageChoices();
+				ManageChoices();
+			}
+			else if(!currentTags.Contains("Ended"))
+			{
+				currentTags = story.currentTags;
+				GuiManager.HideDisplay();
+				InputManager.inDialogue = false;
 			}
 			else
 			{
-				GuiManager.HideDisplay();
+				story.ChoosePathString("OneLiner");
 			}
 		}
 	}
 
-	private void manageChoices()
+	private void ManageChoices()
 	{
 		foreach (var choice in story.currentChoices)
 		{

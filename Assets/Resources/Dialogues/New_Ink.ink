@@ -10,6 +10,11 @@ Banana man
 
 THE CHOICE BEGINS
 * Choose me ! []
-    I'll bring you happiness -> END
+    I'll bring you happiness -> END # Ended
 * Kill me []
-    I'll bring you despair   -> END
+    I'll bring you despair   -> END # Ended
+    
+    
+=== OneLiner
+
+Test du one-liner -> END # Ended

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Character : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Character : MonoBehaviour
 	private Age acceptsAge;
 
 	public bool is_player = false;
+	[FormerlySerializedAs("has_dialog")] public bool has_dialogue = false;
 
 	private int dialogueProgression;
 	
