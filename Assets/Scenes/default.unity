@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 922173717}
   - component: {fileID: 922173716}
   - component: {fileID: 922173715}
+  - component: {fileID: 922173721}
   - component: {fileID: 922173720}
   - component: {fileID: 922173719}
   m_Layer: 8
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   can_move: 0
   speed_modifier: 1.5
-  speed_old: 0.8
+  speed_elder: 0.8
   speed_adult: 1
   speed_teen: 1.5
   speed_child: 1.2
@@ -308,7 +309,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -343,7 +344,20 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &922173721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 922173714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2ffcfd41b534e86bb93bb07400e152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  age: 3
+  is_player: 0
 --- !u!1 &1237064883
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +370,7 @@ GameObject:
   - component: {fileID: 1237064889}
   - component: {fileID: 1237064888}
   - component: {fileID: 1237064887}
+  - component: {fileID: 1237064890}
   - component: {fileID: 1237064886}
   m_Layer: 8
   m_Name: Character
@@ -449,7 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   can_move: 1
   speed_modifier: 1.5
-  speed_old: 0.8
+  speed_elder: 0.8
   speed_adult: 1
   speed_teen: 1.5
   speed_child: 1.2
@@ -498,6 +513,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1237064890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1237064883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2ffcfd41b534e86bb93bb07400e152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  age: 1
+  is_player: 1
 --- !u!1 &1709659582
 GameObject:
   m_ObjectHideFlags: 0
