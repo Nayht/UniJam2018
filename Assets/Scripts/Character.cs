@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
+	public static Object spirit;
+
 	private InputManager inputManager;
 	private MoveEngine moveEngine;
 	private Collider2D collider;
@@ -16,6 +18,7 @@ public class Character : MonoBehaviour
 	public float counter_life; // time the character has been possessed
 	[SerializeField]
 	private float max_life = 30f;
+	public float animation_time = 1f;
 
 	private int dialogueProgression;
 
@@ -30,6 +33,7 @@ public class Character : MonoBehaviour
 		counter_life = 0;
 		mainSlider = (GameObject.FindObjectsOfType(typeof(Slider)) as Slider[])[0];
 		slider_fill = (GameObject.Find("SliderFill")).GetComponent<Image>();
+		spirit = Resources.Load("Prefabs/Spirit");
 	}
 	
 	// Update is called once per frame
@@ -135,6 +139,13 @@ public class Character : MonoBehaviour
 			return counter_life < max_life;
 	}
 
+	public void set_active_player() {
+		is_player = true;
+		moveEngine.can_move = true;
+		collider.isTrigger = false;
+		inputManager.time_last_proxy_possess = Time.time;
+	}
+
 	public void switch_corpse(Character other) {
 		// TODO : check if has no dialog
 		if (is_young_enough())
@@ -149,10 +160,10 @@ public class Character : MonoBehaviour
 			other_input_manager.chase_mouse = false;
 			other_collider.isTrigger = true;
 			// TODO : launch animation
-			is_player = true;
-			moveEngine.can_move = true;
-			collider.isTrigger = false;
-			inputManager.time_last_proxy_possess = Time.time;
+			GameObject spirit_orb = Instantiate(spirit) as GameObject;
+			spirit_orb.GetComponent<SpiritTravel>().initialize(other.transform.position, transform.position, animation_time);
+			//
+			Invoke("set_active_player", animation_time);
 		}
 	}
 }
