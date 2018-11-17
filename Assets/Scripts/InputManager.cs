@@ -44,6 +44,11 @@ public class InputManager : MonoBehaviour {
 		{
 			dialogEngine.Progress();
 		}
+
+		if (Input.GetKeyUp("h"))
+		{
+			GuiManager.ToggleHistory();
+		}
 	}
 
 	// called if moused over

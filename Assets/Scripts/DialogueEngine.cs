@@ -8,6 +8,7 @@ using Ink.Runtime;
 public class DialogueEngine : MonoBehaviour
 {
 	private Story story;
+	private Character character;
 	
 	[SerializeField]
 	private string storyLocation;
@@ -19,6 +20,8 @@ public class DialogueEngine : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		character = GetComponent<Character>();
+		
 		currentTags = new List<string>();
 		if (string.IsNullOrEmpty(storyLocation))
 		{
@@ -39,7 +42,7 @@ public class DialogueEngine : MonoBehaviour
 	{
 		if (story.canContinue)
 		{
-			GuiManager.Display(story.Continue());
+			GuiManager.Display(character.name,story.Continue());
 		}
 		else
 		{
