@@ -17,7 +17,7 @@ public class InputManager : MonoBehaviour {
 	[SerializeField]
 	private float distance_stop = 0.1f;
 	[SerializeField]
-	private float distance_dialogue = 0.5f;
+	private float distance_dialogue = 2.0f;
 
 	// to see if click is relevant
 	private float time_click_down;
@@ -132,7 +132,7 @@ public class InputManager : MonoBehaviour {
 			chase_mouse = chase_mouse == false;
 			mouse_position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
 		}
-		if (chase_mouse)
+		if (chase_mouse && !inDialogue)
 		{
 			direction = mouse_position - position;
 			// if we are close enough we stop

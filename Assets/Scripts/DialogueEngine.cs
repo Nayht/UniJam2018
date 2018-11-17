@@ -42,6 +42,10 @@ public class DialogueEngine : MonoBehaviour
 		}
 		else
 		{
+			foreach (string tag in currentTags)
+			{
+				Debug.Log(tag);
+			}
 			if (story.currentChoices.Count > 0)
 			{
 				ManageChoices();
@@ -54,6 +58,7 @@ public class DialogueEngine : MonoBehaviour
 			}
 			else
 			{
+				currentTags.Clear();
 				story.ChoosePathString("OneLiner");
 			}
 		}
