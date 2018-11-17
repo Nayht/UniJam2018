@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveEngine : MonoBehaviour {
 
-	public bool can_move; // only active for the current possessed character, can be set false for dialogs and other stuff
+	public bool can_move = false; // only active for the current possessed character, can be set false for dialogs and other stuff
 	Rigidbody2D rb;
 	[SerializeField]
 	private float speed_modifier = 1.5f;
@@ -20,7 +20,6 @@ public class MoveEngine : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D>();
-		can_move = true;
 	}
 	
 	public void move(Vector2 direction) {

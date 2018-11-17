@@ -16,6 +16,12 @@ public class InputManager : MonoBehaviour {
 	[SerializeField]
 	private float distance_dialogue = 0.5f;
 
+	// to see if click is relevant
+	private float time_click_down;
+	private float time_click_up;
+	private float time_relevant = 1.0f;
+	private float distance_relevant = 2.0f;
+
 	// Use this for initialization
 	void Start () {
 		moveEngine = GetComponent<MoveEngine>();
@@ -27,6 +33,37 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 		movementController();
 	}
+
+	// called if has been clicked
+	void OnMouseOver() {
+		if (Input.GetMouseButtonDown(1))
+		{
+			time_click_down = Time.time;
+		}
+		if (Input.GetMouseButtonUp(1))
+		{
+			time_click_up = Time.time;
+			if (time_click_up - time_click_down < time_relevant)
+			{
+				Collider2D[] collider_nearby;
+				Vector2 position = new Vector2(transform.position.x, transform.position.y);
+				collider_nearby = Physics2D.OverlapCircleAll(position,distance_relevant);
+				//for( int i = 0 ; i < collider_nearby.length ; i++)
+				foreach (Collider2D col in collider_nearby)
+				{
+					col.GetComponent<MoveEngine>().can_move = false;
+				}
+				moveEngine.can_move = true;
+			}
+		}
+	}
+/*
+	void possession() {
+		if (Input.GetMouseButtonDown(1)) // right click
+		{
+		}
+	}
+	*/
 
 	// gets the input and generates a direction for moveEngine.move
 	void movementController() {
