@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour {
 	private Vector2 mouse_position;
 	[SerializeField]
 	private float distance_stop = 0.1f;
+	[SerializeField]
+	private float distance_dialogue = 0.5f;
 
 	// Use this for initialization
 	void Start () {
