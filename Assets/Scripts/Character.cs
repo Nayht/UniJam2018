@@ -84,6 +84,7 @@ public class Character : MonoBehaviour
 				{
 					// TODO : Message caché
 					// "Félicitations, cette situation n'était pas supposée arriver, voici une nouvelle chance de continuer"
+					counter_life = 0;
 					age = Age.CHILD;
 				}
 			}
