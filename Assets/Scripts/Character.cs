@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class Character : MonoBehaviour
 {
 	private InputManager inputManager;
 	private MoveEngine moveEngine;
 	private Collider2D collider;
-
-	public Age age;
-	private Age acceptsAge;
+	
+	[SerializeField] public string name;
+	[SerializeField] public Age age;
+	[SerializeField] public Age acceptsAge;
 
 	public bool is_player = false;
+	public bool has_dialogue = false;
 	public float counter_life; // time the character has been possessed
 	[SerializeField]
 	private float max_life = 30f;

@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour {
 
 	// over MonoBehaviours
 	private MoveEngine moveEngine;
+	private DialogueEngine dialogEngine;
 	private Transform transform;
 	private Character character;
 	private Collider2D collider;
@@ -16,8 +17,7 @@ public class InputManager : MonoBehaviour {
 	private Vector2 mouse_position;
 	[SerializeField]
 	private float distance_stop = 0.1f;
-	[SerializeField]
-	private float distance_dialogue = 0.5f;
+	[SerializeField] private float distance_dialogue = 2.0f;
 	private float min_velocity = 0.01f;
 
 	// to see if click is relevant and other possession stuff
@@ -28,9 +28,12 @@ public class InputManager : MonoBehaviour {
 	public float time_last_proxy_possess = 0f;
 	private float delay_proxy_possess = 0.1f;
 
+	public static bool inDialogue;
+	
 	// Use this for initialization
 	void Start () {
 		moveEngine = GetComponent<MoveEngine>();
+		dialogEngine = GetComponent<DialogueEngine>();
 		transform = GetComponent<Transform>();
 		character = GetComponent<Character>();
 		collider = GetComponent<Collider2D>();
@@ -45,13 +48,23 @@ public class InputManager : MonoBehaviour {
 			movementController();
 			proximity_possess();
 		}
+		
+		if (inDialogue && Input.GetMouseButtonUp(0) && dialogEngine != null)
+		{
+			dialogEngine.Progress();
+		}
+
+		if (Input.GetKeyUp("h"))
+		{
+			GuiManager.ToggleHistory();
+		}
 	}
 
 	void proximity_possess() {
 		Character nearest = character.find_nearest_possessable();
 		if (nearest != null)
 		{
-			float distance = (transform.position - nearest.GetComponent<Transform>().position).magnitude;
+			float distance = (transform.position - nearest.transform.position).magnitude;
 			if( distance < distance_relevant)
 			{
 				// TODO : hilight nearest
@@ -62,40 +75,79 @@ public class InputManager : MonoBehaviour {
 			}
 		}
 	}
-
-
-	// called if has been clicked
+	
+	// called if moused over
 	void OnMouseOver() {
-		if (Input.GetMouseButtonDown(1))
+		if (!inDialogue && !character.has_dialogue)
 		{
-			time_click_down = Time.time;
-		}
-		if (Input.GetMouseButtonUp(1))
-		{
-			time_click_up = Time.time;
-			if (time_click_up - time_click_down < time_relevant)
+			if (Input.GetMouseButtonDown(1))
 			{
-				Collider2D[] collider_nearby;
-				Vector2 position = new Vector2(transform.position.x, transform.position.y);
-				collider_nearby = Physics2D.OverlapCircleAll(position,distance_relevant);
-				Character other_character;
-				MoveEngine other_move_engine;
-				foreach (Collider2D col in collider_nearby)
-				{
-					other_character = col.GetComponent<Character>();
-					if (other_character != null && col != collider) // if is a character and is not the same object
-					{
-						if (other_character.is_player)
-						{
-							character.switch_corpse(other_character);
-							break;
-						}
-					}
+				time_click_down = Time.time;
+			}
 
+			if (Input.GetMouseButtonUp(1))
+			{
+				time_click_up = Time.time;
+				if (time_click_up - time_click_down < time_relevant)
+				{
+					Character player = GetPlayerInRadius(distance_relevant);
+					if (player != null)
+					{
+						character.switch_corpse(player);
+					}
+				}
+			}
+		}
+		else if (character.has_dialogue)
+		{
+			if (!inDialogue && Input.GetMouseButtonUp(0))
+			{
+				Character player = GetPlayerInRadius(distance_dialogue);
+				if (player != null)
+				{
+					inDialogue = true;
+					chase_mouse = false;
+					if (player.age == character.acceptsAge)
+					{
+						Debug.Log("Good age");
+						dialogEngine.GoodAgeProgress();
+					}
+					else
+					{
+						dialogEngine.Progress();
+					}
 				}
 			}
 		}
 	}
+	
+	private Character GetPlayerInRadius(float radius)
+	{
+		Collider2D[] collider_nearby;
+		Vector2 position = new Vector2(transform.position.x, transform.position.y);
+		collider_nearby = Physics2D.OverlapCircleAll(position,radius);
+		Character other_character;
+		foreach (Collider2D col in collider_nearby)
+		{
+			other_character = col.GetComponent<Character>();
+			if (other_character == null && col == collider) continue;
+			if (other_character.is_player)
+			{
+				return (other_character);
+			}
+		}
+
+		return (null);
+	}
+	
+	
+/*
+	void possession() {
+		if (Input.GetMouseButtonDown(1)) // right click
+		{
+		}
+	}
+	*/
 
 	// gets the input and generates a direction for moveEngine.move
 	void movementController() {
@@ -103,13 +155,13 @@ public class InputManager : MonoBehaviour {
 		Vector2 keyboard_direction; // the direction given by the keyboard
 		Vector2 position = new Vector2(transform.position.x, transform.position.y);
 		// MOUSE
-		if (Input.GetMouseButtonDown(0)) // left click
+		if (Input.GetMouseButtonDown(0) && !inDialogue) // left click
 		{
 			// TODO : Need to check if anyone is under the mouse, you don't want to keep walking into people eternally
 			chase_mouse = chase_mouse == false;
 			mouse_position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x,Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
 		}
-		if (chase_mouse)
+		if (chase_mouse && !inDialogue)
 		{
 			direction = mouse_position - position;
 			// if we are close enough we stop
@@ -127,7 +179,7 @@ public class InputManager : MonoBehaviour {
 		// KEYBOARD
 		keyboard_direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		// the keyboard is prioritary
-		if (keyboard_direction.magnitude > 0)
+		if (keyboard_direction.magnitude > 0 && !inDialogue)
 		{
 			direction = keyboard_direction;
 			chase_mouse = false;
