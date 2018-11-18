@@ -91,7 +91,7 @@ public class InputManager : MonoBehaviour {
 				if (time_click_up - time_click_down < time_relevant)
 				{
 					Character player = GetPlayerInRadius(distance_relevant);
-					if (player != null)
+					if (player != null && player != character)
 					{
 						character.switch_corpse(player);
 					}
