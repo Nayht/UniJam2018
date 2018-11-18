@@ -1,0 +1,22 @@
+Partie 1 : Defilement LENT de gauche à droite 
+avec, à chaque nouvelle phrase, une nouvelle 
+image qui remplace la précedente 
+(phrase n°4 sans chgt d'image)
+
+Partie 2 : L'image de fond ne bouge quasiment pas.
+Le cerf apparait d'un coté, saute.
+Fondu sur : Le cerf debout, des animaux posay
+Fondu sur : Image du fond chaotique et animaux morts
+/!\ Differentes couches d'herbes sont dispo
+pour pouvoir mettre les animaux sur differentes
+profondeurs.
+
+
+Partie 4 : Image de fond = sans buissond
+Un PNJ apparait derriere le buisson et se deplace
+vers la droite
+
+Partie 5 : Meme environement que partie 4
+mais après un fondu
+Le perso se trouve devant l'eau et vieillit
+
