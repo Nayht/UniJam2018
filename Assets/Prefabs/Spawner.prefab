@@ -1,0 +1,217 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1509262898454592}
+  m_IsPrefabAsset: 1
+--- !u!1 &1509262898454592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4146743951763614}
+  - component: {fileID: 114681519964792900}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4146743951763614
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509262898454592}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.99, y: -1.3098854, z: 0.10431619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114681519964792900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509262898454592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7446421d4a679f44a964c8afce12bb3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lambda: {fileID: 1602276027027472, guid: 292c11a0952e30c469d7653772604722, type: 2}
+  maxCharacters: 10
+  spawn_origin:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  spawn_freq: 5
+  yeuxEnfantDown:
+  - {fileID: 21300000, guid: 9a6dbf47b80b20b4ba5abff56f862a12, type: 3}
+  - {fileID: 21300000, guid: 0ad3444b8928dad47a538cac63592918, type: 3}
+  - {fileID: 21300000, guid: ebf141bead0a12f4e97f9896fc38dace, type: 3}
+  cheveuxEnfantDown:
+  - {fileID: 21300000, guid: 761b5f0ea9f73bb42b5356fb23dcf426, type: 3}
+  - {fileID: 21300000, guid: d48fdfd3dc9e41d4785fafb8a6119990, type: 3}
+  teteEnfantDown:
+  - {fileID: 21300000, guid: 02b20950fc570c64d8d549ffe88f60a7, type: 3}
+  corpsEnfantDown:
+  - {fileID: 21300000, guid: 228db6758d596e5438486dea3a257191, type: 3}
+  boucheEnfantDown:
+  - {fileID: 21300000, guid: d46fbd2bc798fb94fa43ad125130c218, type: 3}
+  - {fileID: 21300000, guid: bf3ca41ddd7c1a14bb479723ebaf4969, type: 3}
+  - {fileID: 21300000, guid: 784be296a2e9df240ba7dc848e1bdf91, type: 3}
+  yeuxEnfantSide:
+  - {fileID: 21300000, guid: d36fdfe49a357fa4c9d368466f0dc29f, type: 3}
+  - {fileID: 21300000, guid: beb52c4970c1cb14b8e363900a455e86, type: 3}
+  - {fileID: 21300000, guid: 6925310a5a8483e4586c2b5f765207e1, type: 3}
+  cheveuxEnfantSide:
+  - {fileID: 21300000, guid: 729e85ff6931f6b4da92f4490ac9f255, type: 3}
+  - {fileID: 21300000, guid: ad02196d326e07346a1b3c7a0847905b, type: 3}
+  teteEnfantSide:
+  - {fileID: 21300000, guid: 40667fb163efe33489239477eebbba3f, type: 3}
+  corpsEnfantSide:
+  - {fileID: 21300000, guid: 863f11faf8e99dd469d6cff9d3dc0018, type: 3}
+  boucheEnfantSide:
+  - {fileID: 21300000, guid: 0a34bf9dad55e2740b0c12b390efb10c, type: 3}
+  - {fileID: 21300000, guid: ace306a1044142a418733ba4173bab68, type: 3}
+  - {fileID: 21300000, guid: ef1c5cf218a02d24282ebdac2b959395, type: 3}
+  yeuxEnfantUp: []
+  cheveuxEnfantUp:
+  - {fileID: 21300000, guid: 96e12ab3dbcffc94eb6be54318e15862, type: 3}
+  - {fileID: 21300000, guid: 22fa5a56311db034aabfe8d017745da0, type: 3}
+  teteEnfantUp:
+  - {fileID: 21300000, guid: d92b3aa3c345aeb4e88f1605c4888a8e, type: 3}
+  corpsEnfantUp:
+  - {fileID: 21300000, guid: 55a7f2e036c0475479944e56854ad559, type: 3}
+  boucheEnfantUp: []
+  yeuxAdoDown:
+  - {fileID: 21300000, guid: 16206858a6fe80d48b808bef9ffe45a3, type: 3}
+  - {fileID: 21300000, guid: be776435b062d8e468d6ecbd0cabc2f8, type: 3}
+  - {fileID: 21300000, guid: f433cfcd740f1634594eb017f6c1ff87, type: 3}
+  cheveuxAdoDown:
+  - {fileID: 21300000, guid: 9adfc6decca758d4d9583c044f029c80, type: 3}
+  - {fileID: 21300000, guid: b36ca9f6301934a41ac5f447897f95b3, type: 3}
+  teteAdoDown:
+  - {fileID: 21300000, guid: 4e3e20d2727e2704bbc8ecd8b634a728, type: 3}
+  corpsAdoDown:
+  - {fileID: 21300000, guid: 62bfd56537523b4459f3c76b75541d78, type: 3}
+  boucheAdoDown:
+  - {fileID: 21300000, guid: 3babe9907d1dfd944a95675d03bddc0c, type: 3}
+  - {fileID: 21300000, guid: 623a32457ccffa5489420132528ca46d, type: 3}
+  - {fileID: 21300000, guid: a19838d7f2aed6b4f83f792718f5667c, type: 3}
+  yeuxAdoSide:
+  - {fileID: 21300000, guid: 358b0f2992a04d34eb8c94e2b9b4c96c, type: 3}
+  - {fileID: 21300000, guid: fffbe011c5c3aaf439ffe7f0f74b0315, type: 3}
+  - {fileID: 21300000, guid: 4ac6d29d8036fc5469445878e9c6e019, type: 3}
+  cheveuxAdoSide:
+  - {fileID: 21300000, guid: 516696d76ec316f499a8cf1ab8d895e2, type: 3}
+  - {fileID: 21300000, guid: fd7fdc62db0547942a654270241c792f, type: 3}
+  teteAdoSide:
+  - {fileID: 21300000, guid: 4fcf58be31af2a94ba2c222ef7caba29, type: 3}
+  corpsAdoSide:
+  - {fileID: 21300000, guid: 2cb5db1ce8f51384585b771018fc79c4, type: 3}
+  boucheAdoSide:
+  - {fileID: 21300000, guid: 04849090e7034b842aa83404a6ae8ad4, type: 3}
+  - {fileID: 21300000, guid: ea149a18a889c6d4e8482f2201909239, type: 3}
+  - {fileID: 21300000, guid: 4bc988884e38b444386d26945a46c30a, type: 3}
+  yeuxAdoUp: []
+  cheveuxAdoUp:
+  - {fileID: 21300000, guid: 575c685594fd123469896796c39d71cf, type: 3}
+  - {fileID: 21300000, guid: 8f3fc11c0d13b724080c8f96555eeaf0, type: 3}
+  teteAdoUp:
+  - {fileID: 21300000, guid: 54d8980a6ecc93d4193510aab63b2c35, type: 3}
+  corpsAdoUp:
+  - {fileID: 21300000, guid: c1789bc311331094ab16711c5a0d9a24, type: 3}
+  boucheAdoUp: []
+  yeuxAdulteDown:
+  - {fileID: 21300000, guid: 8ed014654bb6a42409fc0d86b8e94e35, type: 3}
+  - {fileID: 21300000, guid: 2d751c1f54f6a0740a2bbf33ccc5c6e3, type: 3}
+  - {fileID: 21300000, guid: e5a9f9364f0209c4786c2d2176ff04a9, type: 3}
+  cheveuxAdulteDown:
+  - {fileID: 21300000, guid: 22456db3963c1704e9276115d9fcd044, type: 3}
+  - {fileID: 21300000, guid: 229ea0a8634e40c49adacc4d69f1190f, type: 3}
+  teteAdulteDown:
+  - {fileID: 21300000, guid: 3e812849cb74aa142bb914405ddd8f9d, type: 3}
+  corpsAdulteDown:
+  - {fileID: 21300000, guid: 4de5505679075624a9eafc5c10aa7869, type: 3}
+  boucheAdulteDown:
+  - {fileID: 21300000, guid: 384ca29dd3f806042a725404f45d9808, type: 3}
+  - {fileID: 21300000, guid: 2cbbd7195e2385342b582725151117af, type: 3}
+  - {fileID: 21300000, guid: 3b56e40d1074ed148bf56840adbf5861, type: 3}
+  yeuxAdulteSide:
+  - {fileID: 21300000, guid: 9f988958eec5bc446a17bce9d5b323c5, type: 3}
+  - {fileID: 21300000, guid: c918492ad9f286348a71dcdd5544030c, type: 3}
+  - {fileID: 21300000, guid: 220d27dbfc00061458bec49e930b18e8, type: 3}
+  cheveuxAdulteSide:
+  - {fileID: 21300000, guid: 3982d5f36fc066647a7cd71d4d3246c3, type: 3}
+  - {fileID: 21300000, guid: 4a772903df257944ca7ad7565cdd5ccf, type: 3}
+  teteAdulteSide:
+  - {fileID: 21300000, guid: 6c1d5ada1a4d7d94b99a1a03cf86845e, type: 3}
+  corpsAdulteSide:
+  - {fileID: 21300000, guid: 42f329fb1e7d6ac47863530bd32f8e65, type: 3}
+  boucheAdulteSide:
+  - {fileID: 21300000, guid: f47dd4c30775c3347ba7eccac3be47e8, type: 3}
+  - {fileID: 21300000, guid: ae32902ce12a39f4a96838b736a47b45, type: 3}
+  - {fileID: 21300000, guid: 133bf2f217113684880ed6999a69dd7d, type: 3}
+  yeuxAdulteUp: []
+  cheveuxAdulteUp:
+  - {fileID: 21300000, guid: 1b4374cb76afa3341b5ac9ab8529a752, type: 3}
+  - {fileID: 21300000, guid: 7a9f03e22b9a8904caf7ece8961b0ea9, type: 3}
+  teteAdulteUp:
+  - {fileID: 21300000, guid: f695691b77a1ce843b73712b1cb6f7af, type: 3}
+  corpsAdulteUp:
+  - {fileID: 21300000, guid: b5bdf347b251bba41b4694041d817231, type: 3}
+  boucheAdulteUp: []
+  yeuxVieuxDown:
+  - {fileID: 21300000, guid: aaa2b932b552c414990cee5e71b183b3, type: 3}
+  - {fileID: 21300000, guid: 230af8eb79a7f6248bbe2798c7375c3c, type: 3}
+  - {fileID: 21300000, guid: b41db3bc821621f4fb8624e1c2381a84, type: 3}
+  cheveuxVieuxDown:
+  - {fileID: 21300000, guid: ab5be7516a2389744805d3ecb3e83776, type: 3}
+  - {fileID: 21300000, guid: 05f81401bf97db94592aaf2cd846a8b8, type: 3}
+  teteVieuxDown:
+  - {fileID: 21300000, guid: 40ee2154c1ae16448b2f745b85e7536d, type: 3}
+  corpsVieuxDown:
+  - {fileID: 21300000, guid: 4a4f7a66eddfdfb4baa4e8c98e458da9, type: 3}
+  boucheVieuxDown:
+  - {fileID: 21300000, guid: c18bb05b6d2747945ba0b3b8fe1a10d5, type: 3}
+  - {fileID: 21300000, guid: 6df71b83c20998c48955dff7f7839d18, type: 3}
+  - {fileID: 21300000, guid: 6283ed38b51e32c4299801c9ca93d4c8, type: 3}
+  yeuxVieuxSide:
+  - {fileID: 21300000, guid: 28a4dfce54d3fbb4aae5fb52a1b414c3, type: 3}
+  - {fileID: 21300000, guid: 9617a7ab87b9bef41a5ca1f525ea13c5, type: 3}
+  - {fileID: 21300000, guid: 05f6cd81c9184c944b1f1b8fd51efff9, type: 3}
+  cheveuxVieuxSide:
+  - {fileID: 21300000, guid: 98a8a0f05041f774fa8c0bf867daddf6, type: 3}
+  - {fileID: 21300000, guid: c36663bd987c4a74484db2a6a8607e71, type: 3}
+  teteVieuxSide:
+  - {fileID: 21300000, guid: 6a7d6307d779af548b53a85d4c8c9ba7, type: 3}
+  corpsVieuxSide:
+  - {fileID: 21300000, guid: 7602bc2602fcde242bef89747d4e872c, type: 3}
+  boucheVieuxSide:
+  - {fileID: 21300000, guid: 0b6e2ac24a8a23a4fa20fcb54b1b20ad, type: 3}
+  - {fileID: 21300000, guid: 6bd11f5d00fab2b489a2af109bdb04da, type: 3}
+  - {fileID: 21300000, guid: 8db7aa7f72147ff4f9402d2d1ee82c83, type: 3}
+  yeuxVieuxUp: []
+  cheveuxVieuxUp:
+  - {fileID: 21300000, guid: cf3fa1377d102814abead33b407355f3, type: 3}
+  - {fileID: 21300000, guid: 186de6411e8c5a140940bdee6e65676c, type: 3}
+  teteVieuxUp:
+  - {fileID: 21300000, guid: ccf6bced76b9aba4d9f29329c65be490, type: 3}
+  corpsVieuxUp:
+  - {fileID: 21300000, guid: 67fe03253bddc1e49bee296cbc854286, type: 3}
+  boucheVieuxUp: []
