@@ -4,6 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Serialization;
 
+[System.Serializable]
+public struct Body
+{
+    public Sprite boucheUp;
+    public Sprite cheveuxUp;
+    public Sprite corpsUp;
+    public Sprite teteUp;
+    public Sprite yeuxUp;
+
+    public Sprite boucheDown;
+    public Sprite cheveuxDown;
+    public Sprite corpsDown;
+    public Sprite teteDown;
+    public Sprite yeuxDown;
+
+    public Sprite boucheSide;
+    public Sprite cheveuxSide;
+    public Sprite corpsSide;
+    public Sprite teteSide;
+    public Sprite yeuxSide;
+
+    public Color boucheCouleur;
+    public Color cheveuxCouleur;
+    public Color corpsCouleur;
+    public Color teteCouleur;
+    public Color yeuxCouleur;
+}
+[System.Serializable]
+public struct BodyLife
+{
+    public Body childBody;
+    public Body teenBody;
+    public Body adultBody;
+    public Body elderBody;
+}
+
+public enum Direction
+{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
+
 public class Character : MonoBehaviour
 {
 	public static Object spirit;
@@ -27,6 +71,209 @@ public class Character : MonoBehaviour
 
 	public Slider mainSlider;
 	public Image slider_fill;
+
+	//Qasim
+    [Header("Character appearance")]
+    //public Body body;
+    public BodyLife bL;
+
+    [Header("Body")]
+    public GameObject cheveux;
+    public GameObject tete;
+    public GameObject yeux;
+    public GameObject bouche;
+    public GameObject corps;
+    
+
+    public Character(Age age, BodyLife bl)
+    {
+        
+        this.age = age;
+        this.bL = bl;
+
+    }
+
+    public void Change(Age age, Direction direction)
+    {
+
+
+        if(age==Age.ADULT)
+        {
+            cheveux.GetComponent<SpriteRenderer>().color = bL.adultBody.cheveuxCouleur;
+            corps.GetComponent<SpriteRenderer>().color = bL.adultBody.corpsCouleur;
+            tete.GetComponent<SpriteRenderer>().color = bL.adultBody.teteCouleur;
+            switch (direction)
+            {
+                case Direction.DOWN:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.cheveuxDown;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.yeuxDown;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.adultBody.boucheDown;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.adultBody.corpsDown;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.adultBody.teteDown;
+                    break;
+                case Direction.UP:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.cheveuxUp;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.yeuxUp;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.adultBody.boucheUp;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.adultBody.corpsUp;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.adultBody.teteUp;
+                    break;
+                case Direction.LEFT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.adultBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.adultBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.adultBody.teteSide;
+                    break;
+                case Direction.RIGHT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.adultBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.adultBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.adultBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.adultBody.teteSide;
+                    break;
+            } 
+        }
+        if (age == Age.CHILD)
+        {
+            cheveux.GetComponent<SpriteRenderer>().color = bL.childBody.cheveuxCouleur;
+            corps.GetComponent<SpriteRenderer>().color = bL.childBody.corpsCouleur;
+            tete.GetComponent<SpriteRenderer>().color = bL.childBody.teteCouleur;
+            switch (direction)
+            {
+                case Direction.DOWN:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.childBody.cheveuxDown;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.childBody.yeuxDown;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.childBody.boucheDown;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.childBody.corpsDown;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.childBody.teteDown;
+                    break;
+                case Direction.UP:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.childBody.cheveuxUp;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.childBody.yeuxUp;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.childBody.boucheUp;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.childBody.corpsUp;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.childBody.teteUp;
+                    break;
+                case Direction.LEFT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.childBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.childBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.childBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.childBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.childBody.teteSide;
+                    break;
+                case Direction.RIGHT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.childBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.childBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.childBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.childBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.childBody.teteSide;
+                    break;
+            }
+        }
+        if (age == Age.TEEN)
+        {
+            cheveux.GetComponent<SpriteRenderer>().color = bL.teenBody.cheveuxCouleur;
+            corps.GetComponent<SpriteRenderer>().color = bL.teenBody.corpsCouleur;
+            tete.GetComponent<SpriteRenderer>().color = bL.teenBody.teteCouleur;
+            switch (direction)
+            {
+                case Direction.DOWN:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.cheveuxDown;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.yeuxDown;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.teenBody.boucheDown;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.teenBody.corpsDown;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.teenBody.teteDown;
+                    break;
+                case Direction.UP:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.cheveuxUp;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.yeuxUp;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.teenBody.boucheUp;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.teenBody.corpsUp;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.teenBody.teteUp;
+                    break;
+                case Direction.LEFT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.teenBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.teenBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.teenBody.teteSide;
+                    break;
+                case Direction.RIGHT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.teenBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.teenBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.teenBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.teenBody.teteSide;
+                    break;
+            }
+        }
+        if (age == Age.ELDER)
+        {
+            cheveux.GetComponent<SpriteRenderer>().color = bL.elderBody.cheveuxCouleur;
+            corps.GetComponent<SpriteRenderer>().color = bL.elderBody.corpsCouleur;
+            tete.GetComponent<SpriteRenderer>().color = bL.elderBody.teteCouleur;
+            switch (direction)
+            {
+                case Direction.DOWN:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.cheveuxDown;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.yeuxDown;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.elderBody.boucheDown;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.elderBody.corpsDown;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.elderBody.teteDown;
+
+                    break;
+                case Direction.UP:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.cheveuxUp;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.yeuxUp;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.elderBody.boucheUp;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.elderBody.corpsUp;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.elderBody.teteUp;
+                    break;
+                case Direction.LEFT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.elderBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.elderBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.elderBody.teteSide;
+                    break;
+                case Direction.RIGHT:
+                    cheveux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.cheveuxSide;
+                    yeux.GetComponent<SpriteRenderer>().sprite = bL.elderBody.yeuxSide;
+                    bouche.GetComponent<SpriteRenderer>().sprite = bL.elderBody.boucheSide;
+                    corps.GetComponent<SpriteRenderer>().sprite = bL.elderBody.corpsSide;
+                    tete.GetComponent<SpriteRenderer>().sprite = bL.elderBody.teteSide;
+                    break;
+            }
+        }
+        if(direction==Direction.LEFT)
+        {
+            SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
+            foreach(SpriteRenderer sr in srs)
+            {
+                sr.flipX = true;
+            }
+        }
+        else
+        {
+            SpriteRenderer[] srs = GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer sr in srs)
+            {
+                sr.flipX = false;
+            }
+        }
+        if(direction==Direction.UP)
+        {
+            yeux.GetComponent<SpriteRenderer>().enabled = false;
+            bouche.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            yeux.GetComponent<SpriteRenderer>().enabled = true;
+            bouche.GetComponent<SpriteRenderer>().enabled = true;
+        }
+    }
+	//Qasim
 	
 	// Use this for initialization
 	void Start () {
@@ -44,26 +291,6 @@ public class Character : MonoBehaviour
 		if (is_player)
 		{
 			grow_old();
-		}
-		//temporary
-		SpriteRenderer spr = GetComponent<SpriteRenderer>();
-		switch(age)
-		{
-			case Age.ELDER:
-				spr.color = Color.grey;
-				break;
-			case Age.ADULT:
-				spr.color = Color.red;
-				break;
-			case Age.TEEN:
-				spr.color = Color.yellow;
-				break;
-			case Age.CHILD:
-				spr.color = Color.cyan;
-				break;
-			default:
-				spr.color = Color.red;
-				break;
 		}
 	}
 
