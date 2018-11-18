@@ -130,7 +130,7 @@ public class InputManager : MonoBehaviour {
 		foreach (Collider2D col in collider_nearby)
 		{
 			other_character = col.GetComponent<Character>();
-			if (other_character == null && col == collider) continue;
+			if (other_character == null || col == collider) return (null);//continue;
 			if (other_character.is_player)
 			{
 				return (other_character);
